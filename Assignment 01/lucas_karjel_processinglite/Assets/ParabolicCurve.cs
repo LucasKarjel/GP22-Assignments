@@ -20,7 +20,7 @@ public class ParabolicCurve : ProcessingLite.GP21
             Stroke(0);
             if (m==0)
             {
-                Stroke(255);
+                Stroke(255,0,0);
             }
 
             float y = 10-i;
