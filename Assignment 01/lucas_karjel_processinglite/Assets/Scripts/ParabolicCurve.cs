@@ -16,8 +16,8 @@ public class ParabolicCurve : ProcessingLite.GP21
         
         for (int i = 0; i < 10; i++)
         {
-            float m = i % 3;
             Stroke(0);
+            float m = i % 3;
             if (m==0)
             {
                 Stroke(255,0,0);
