@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Movement : ProcessingLite.GP21
 {
-    float posX;
-    float posY;
-    float diameter = 2;
-    float speed = 5;
-    float vX = 0;
-    float vY= 0;
-    int a = 1;
+    public float diameter = 2;
+    public float speed = 5;
+    public float velocity = 0;
+    public float accelerate = 1;
+    public float decelerate = 2;
+    public float maxSpeed = 5;
     bool IsMoving = false;
+    Vector2 circlePos;
+    Vector2 lastInput;
     // Start is called before the first frame update
     void Start()
     {
-        posX = Width / 2;
-        posY = Height / 2;
+        circlePos = new Vector2(Width / 2, Height / 2);
     }
 
     // Update is called once per frame
@@ -28,55 +28,68 @@ public class Movement : ProcessingLite.GP21
         {
             IsMoving = true;
         }
-        vY += Input.GetAxisRaw("Vertical") * Time.deltaTime;
-        vX += Input.GetAxisRaw("Horizontal") * Time.deltaTime;
 
-        Vector2 vel = new Vector2(Input.GetAxisRaw("Horizontal") * Time.deltaTime, Input.GetAxisRaw("Vertical") * Time.deltaTime);
-        Vector2 move = new Vector2(vX, vY).normalized * Time.deltaTime;
+        Vector2 RawInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        Vector2 SmoothInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
 
-        
-        new Vector2(vX, vY);
-
-        posX += vX * speed * Time.deltaTime;
-        posY += vY * speed * Time.deltaTime;
-        
+        if (RawInput.magnitude != 0)
+        {
+        lastInput = SmoothInput;
+        }
+     
         //Constant velocity downwards
         //posY = posY - v * Time.deltaTime;
 
-        Circle(posX, posY, diameter);
 
-        if (IsMoving)
+        if (RawInput.magnitude != 0)
         {
-            if (vX > 5)
-            {
-                vX = 5;
-            }
+            velocity += accelerate * Time.deltaTime;
         }
-        else if (IsMoving == false)
+        else if (RawInput.magnitude == 0)
         {
-            if (vX > 0)
-                vX = vX - a * Time.deltaTime;
-            else if (vX < 0)
-                vX = vX + a * Time.deltaTime;
-            //if (v > 0)
-            //v -= a * Time.deltaTime;
+            velocity -= decelerate * Time.deltaTime;
         }
-        if (IsMoving)
-        {
-            if (vY > 5)
-            {
-                vY = 5;
-            }
-        }
-        else if (IsMoving == false)
-        {
-            if (vY > 0)
-                vY = vY - a * Time.deltaTime;
-            else if (vY < 0)
-                vY = vY + a * Time.deltaTime;
-            //if (v > 0)
-            //v -= a * Time.deltaTime;
-        }
-        Square(posX - 5, posY, 2);
+
+        if (velocity < 0)
+            velocity = 0;
+
+        if (velocity > maxSpeed)
+            velocity = maxSpeed;
+        
+        circlePos += lastInput * velocity * Time.deltaTime;
+
+        Circle(circlePos.x, circlePos.y, diameter);
+
+
+        //if (IsMoving)
+        //{
+        //    if (vX > 5)
+        //    {
+        //        vX = 5;
+        //    }
+        //}
+        //else if ()
+        //else if (IsMoving == false)
+        //{
+        //    if (vX > 0)
+        //        vX = vX - accelerate * Time.deltaTime;
+        //    else if (vX < 0)
+        //        vX = vX + accelerate * Time.deltaTime;
+
+        //    if (IsMoving)
+        //{
+        //    if (vY > 5)
+        //    {
+        //        vY = 5;
+        //    }
+        //}
+        //else if (IsMoving == false)
+        //{
+        //    if (vY > 0)
+        //        vY = vY - decelerate * Time.deltaTime;
+        //    else if (vY < 0)
+        //        vY = vY + decelerate * Time.deltaTime;
+        //}
+        //Square(posX - 5, posY, 2);
     }
 }
