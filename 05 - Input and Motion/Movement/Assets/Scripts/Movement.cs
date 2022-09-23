@@ -7,10 +7,9 @@ public class Movement : ProcessingLite.GP21
     public float diameter = 2;
     public float speed = 5;
     public float velocity = 0;
-    public float accelerate = 1;
+    public float accelerate = 2;
     public float decelerate = 2;
     public float maxSpeed = 5;
-    bool IsMoving = false;
     Vector2 circlePos;
     Vector2 lastInput;
     // Start is called before the first frame update
@@ -24,10 +23,10 @@ public class Movement : ProcessingLite.GP21
     {
         Background(50, 166, 240);
 
-        if (Input.anyKey)
-        {
-            IsMoving = true;
-        }
+        //if (Input.anyKey)
+        //{
+        //    IsMoving = true;
+        //}
 
         Vector2 RawInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         Vector2 SmoothInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
