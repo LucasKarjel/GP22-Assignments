@@ -35,6 +35,7 @@ public class Ball : ProcessingLite.GP21
     //Draw our ball
     public void Draw()
     {
+        Debug.Log(position);
         Fill(color1, color2, color3);
         Circle(position.x, position.y, size);
         Debug.Log(size);
@@ -43,9 +44,9 @@ public class Ball : ProcessingLite.GP21
     //Update our ball
     public void UpdatePos()
     {
-        if (position.y + radius > Height && velocity.y < 0 || position.y - radius < 0 && velocity.y > 0)
+        if (position.y + radius > Height && velocity.y > 0 || position.y - radius < 0 && velocity.y < 0)
             velocity.y *= -1;
-        else if (position.x + radius > Width && velocity.x < 0 || position.x - radius < 0 && velocity.x > 0)
+        else if (position.x + radius > Width && velocity.x > 0 || position.x - radius < 0 && velocity.x < 0)
             velocity.x *= -1;
 
         position += velocity * Time.deltaTime;

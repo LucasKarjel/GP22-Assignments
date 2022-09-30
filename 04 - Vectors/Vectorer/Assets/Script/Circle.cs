@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Circle : ProcessingLite.GP21
 {
-    public float diameter = 0.2f;
+    public float diameter = 2f;
     public Vector2 circlePosition;
     public Vector2 oldPosition;
     public Vector2 lineMagnitude;
