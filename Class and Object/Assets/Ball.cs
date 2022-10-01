@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //We still need to inherence from ProcessingLite, so we get access to all functions
-public class Ball : ProcessingLite.GP21
+ class Ball : ProcessingLite.GP21
 {
     //Our class variables
     Vector2 position; //Ball position
@@ -11,8 +11,9 @@ public class Ball : ProcessingLite.GP21
     int color1;
     int color2;
     int color3;
-    public float size;
-    public float radius;
+    float size;
+    float radius;
+
 
     //Ball Constructor, called when we type new Ball(x, y);
     public Ball(float x, float y)
@@ -50,5 +51,27 @@ public class Ball : ProcessingLite.GP21
             velocity.x *= -1;
 
         position += velocity * Time.deltaTime;
+    }
+    public bool CircleCollision()
+    {
+        float maxDistance = Player.diameter + size;
+
+        //first a quick check to see if we are too far away in x or y direction
+        //if we are far away we don't collide so just return false and be done.
+        if (Mathf.Abs(Player.circlePos.x - position.x) > maxDistance || Mathf.Abs(Player.circlePos.y - position.y) > maxDistance)
+        {
+            return false;
+        }
+        //we then run the slower distance calculation
+        //Distance uses Pythagoras to get exact distance, if we still are to far away we are not colliding.
+        else if (Vector2.Distance(new Vector2(global.circlePos.x, Player.circlePos.y), new Vector2(position.x, position.y)) > maxDistance)
+        {
+            return false;
+        }
+        //We now know the points are closer then the distance so we are colliding!
+        else
+        {
+            return true;
+        }
     }
 }

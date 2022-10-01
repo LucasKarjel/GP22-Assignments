@@ -12,8 +12,8 @@ public class Player : ProcessingLite.GP21
     public float accelerate = 10;
     public float decelerate = 20;
     public float maxSpeed = 10;
-    Vector2 circlePos;
-    Vector2 lastInput;
+    public Vector2 circlePos;
+    public Vector2 lastInput;
     // Start is called before the first frame update
     void Start()
     {
