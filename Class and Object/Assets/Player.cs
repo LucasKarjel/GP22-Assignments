@@ -6,13 +6,13 @@ public class Player : ProcessingLite.GP21
 {
     Ball[] balls;
     int numberOfBalls = 10;
-    public float diameter = 2;
+    public static float diameter = 2;
     public float speed = 5;
     public float velocity = 0;
     public float accelerate = 10;
     public float decelerate = 20;
     public float maxSpeed = 10;
-    public Vector2 circlePos;
+    public static Vector2 circlePos;
     public Vector2 lastInput;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class Player : ProcessingLite.GP21
         //A loop that can be used for creating multiple balls.
         for (int i = 0; i < balls.Length; i++)
         {
-            balls[i] = new Ball(5, 5);
+            balls[i] = new Ball(Random.Range(1, 9), Random.Range(1, 9));
         }
     }
     // Update is called once per frame
@@ -56,16 +56,44 @@ public class Player : ProcessingLite.GP21
 
         circlePos += lastInput * velocity * Time.deltaTime;
 
+
         //Update player position
         Stroke(255, 0, 0);
         Fill(0);
         Circle(circlePos.x, circlePos.y, diameter);
         NoStroke();
+
         //Tell each ball to update it's position
         for (int i = 0; i < balls.Length; i++)
-         {
-             balls[i].UpdatePos();
-             balls[i].Draw();
+        {
+            balls[i].UpdatePos();
+            balls[i].Draw();
         }
+
+        for (int i = 0; i < balls.Length; i++)
+            if (balls[i].CircleCollision())
+            {
+                //balls[i] = null;
+                balls[0].GameOver();
+            }
+
+
+        //Update player position
+        //Tell each ball to update it's position
+        //for (int i = 0; i < balls.Length; i++)
+        // {
+        //    if (!balls[i].CircleCollision())
+        //    {
+        //    Stroke(255, 0, 0);
+        //    Fill(0);
+        //    Circle(circlePos.x, circlePos.y, diameter);
+        //    NoStroke();
+        //     balls[i].UpdatePos();
+        //     balls[i].Draw();
+        //    }
+        //    else
+        //    {
+        //        balls[i].GameOver();
+        //    }
     }
 }
