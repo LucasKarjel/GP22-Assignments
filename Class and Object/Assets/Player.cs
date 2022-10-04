@@ -63,6 +63,14 @@ public class Player : ProcessingLite.GP21
         Circle(circlePos.x, circlePos.y, diameter);
         NoStroke();
 
+        //If colliding stop drawing
+        for (int i = 0; i < balls.Length; i++)
+            if (balls[i].CircleCollision())
+            {
+                balls[i].GameOver();
+                balls[i] = null;
+            }
+
         //Tell each ball to update it's position
         for (int i = 0; i < balls.Length; i++)
         {
@@ -70,12 +78,6 @@ public class Player : ProcessingLite.GP21
             balls[i].Draw();
         }
 
-        for (int i = 0; i < balls.Length; i++)
-            if (balls[i].CircleCollision())
-            {
-                //balls[i] = null;
-                balls[0].GameOver();
-            }
 
 
         //Update player position
