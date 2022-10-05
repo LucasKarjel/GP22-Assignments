@@ -55,7 +55,7 @@ class Ball : ProcessingLite.GP21
     }
     public bool CircleCollision()
     {
-        float maxDistance = Player.diameter / 2 + size;
+        float maxDistance = Player.diameter / 2 + size / 2;
 
         //first a quick check to see if we are too far away in x or y direction
         //if we are far away we don't collide so just return false and be done.
