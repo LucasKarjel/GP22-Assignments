@@ -4,24 +4,17 @@ using UnityEngine;
  
 public class TargetFunction : MonoBehaviour
 {
-    public GameObject Target;
-    public float posX;
-    public float posY;
-
+    Target[] TargetSpawn;
+    int MaxTargets = 3;
     // Start is called before the first frame update
     void Start()
     {
+        TargetSpawn = new Target[MaxTargets];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            posX = Random.Range(-8.0f, 8.0f);
-            posY = Random.Range(-4.0f, 4.0f);
-            var position = new Vector2(posX, posY);
-            Instantiate(Target, position, Quaternion.identity);
-        }
+
     }
 }
