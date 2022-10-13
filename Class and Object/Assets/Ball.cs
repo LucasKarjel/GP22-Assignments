@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //We still need to inherence from ProcessingLite, so we get access to all functions
 class Ball : ProcessingLite.GP21
@@ -77,15 +78,45 @@ class Ball : ProcessingLite.GP21
     }
     public void GameOver()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+            GameObject.FindObjectOfType<Player>().Start();
+
         Background(128);
         Stroke(255, 0, 0);
         //G
-        Line(3, 6, 5, 6);
-        Line(3, 6, 3, 4);
-        Line(3, 4, 5, 4);
-        Line(5, 4, 5, 5);
-        Line(4, 5, 5.5f, 5);
+        Line(2, 6, 4, 6);
+        Line(2, 6, 2, 4);
+        Line(2, 4, 4, 4);
+        Line(4, 4, 4, 5);
+        Line(3, 5, 4.5f, 5);
         //A
-        
+        Line(6, 6, 6, 4);
+        Line(6, 6, 8, 6);
+        Line(8, 6, 8, 4);
+        Line(6, 5, 8, 5);
+        //M
+        Line(10, 6, 10, 4);
+        Line(10, 6, 11, 4);
+        Line(11, 4, 12, 6);
+        Line(12, 6, 12, 4);
+        //E
+        Line(14, 6, 14, 4);
+        Line(14, 6, 15.5f, 6);
+        Line(14, 5, 15.5f, 5);
+        Line(14, 4, 15.5f, 4);
+        //Left '
+        Line(8, 3, 8, 2.75f);
+        //R
+        Line(8.5f, 2.75f, 8.5f, 1);
+        Line(8.5f, 2.75f, 9.45f, 2.75f);
+        Line(9.5f, 2.75f, 9.5f, 2);
+        Line(8.5f, 2, 9.45f, 2);
+        Line(8.75f, 1.9f, 9f, 1.9f);
+        Line(9, 1.85f, 9.25f, 1.85f);
+        Line(9.25f, 1.80f, 9.5f, 1.80f);
+        Line(9.5f, 1.80f, 9.5f, 1);
+
+        //Right '
+        Line(10, 3, 10, 2.75f);
     }
 }

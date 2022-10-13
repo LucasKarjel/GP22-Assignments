@@ -17,7 +17,7 @@ public class Player : ProcessingLite.GP21
     public Vector2 rawInput;
     public Vector2 smoothInput;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         circlePos = new Vector2(Width / 2, Height / 2);
 
@@ -67,18 +67,18 @@ public class Player : ProcessingLite.GP21
         for (int i = 0; i < balls.Length; i++)
         {
             //If not colliding
-            if (!balls[i].CircleCollision())
-            {
-                //Tell each ball to update it's position
-                balls[i].UpdatePos();
-                balls[i].Draw();
-            }
-            //If colliding
-            else if (balls[i].CircleCollision())
+            if (balls[i].CircleCollision())
             {
                 //if colliding stop and show game over screen
                 velocity = 0;
                 balls[i].GameOver();
+            }
+            //If colliding
+            else if (!balls[i].CircleCollision())
+            {
+                //Tell each ball to update it's position
+                balls[i].UpdatePos();
+                balls[i].Draw();
             }
         }
     }
