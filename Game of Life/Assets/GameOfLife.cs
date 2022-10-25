@@ -4,7 +4,7 @@ public class GameOfLife : ProcessingLite.GP21
 {
 	float cellSize = 0.25f; //Size of our cells
 	int numberOfColums, numberOfRows;
-	public int spawnChancePercentage = 5;
+	public int spawnChancePercentage = 15;
 	public GameCell[,] currentGen;
 	public GameCell[,] nextGen;
 	public void Start()
@@ -37,8 +37,6 @@ public class GameOfLife : ProcessingLite.GP21
 				if (Random.Range(0, 100) < spawnChancePercentage)
 				{
 					currentGen[x, y].alive = true;
-					nextGen[x, y].alive = true;
-
 				}
 			}
 		}
