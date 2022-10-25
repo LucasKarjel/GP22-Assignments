@@ -91,18 +91,15 @@ public class GameOfLife : ProcessingLite.GP21
 					nextGen[x, y] = currentGen[x, y];
             }
         }
-		CalcNextGen();
     }
 	public void Update()
 	{
 		//Clear screen
 		Background(0);
-
         //TODO: Calculate next generation
-
-		SpawnNextGen();
-
+		CalcNextGen();
 		//TODO: update buffer
+		SpawnNextGen();
 		//Draw all cells.
 		for (int y = 0; y < numberOfRows; y++)
 		{
