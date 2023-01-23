@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0) || Input.touchCount > 0)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            RaycastHit2D hit;
+            //RaycastHit2D hit;
 
             Touch touch = Input.GetTouch(0);
             pointerPos = Camera.main.ScreenToWorldPoint(touch.position);

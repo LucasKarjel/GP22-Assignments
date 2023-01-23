@@ -89,3 +89,6 @@ ProjectSettings/Packages/com.unity.polybrush/Settings.json
 
 # Unity Recorder recordings
 Recordings/
+MobileGame/Assets/Firebase/Plugins/x86_64/FirebaseCppApp-10_3_0.bundle
+MobileGame/Assets/google-services.json
+MobileGame/Assets/StreamingAssets/google-services-desktop.json
