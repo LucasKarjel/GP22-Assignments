@@ -9,6 +9,9 @@ using Firebase.Extensions;
 
 public class SignIn : MonoBehaviour
 {
+    private static SignIn _instance;
+    public static SignIn Instance { get { return _instance;  } }
+
     [SerializeField] private TMP_InputField email;
     [SerializeField] private TMP_InputField password;
     [SerializeField] private TextMeshProUGUI status;
@@ -16,10 +19,21 @@ public class SignIn : MonoBehaviour
     [SerializeField] private Button playButton;
 
     FirebaseAuth auth;
+    public string GetuserID { get { return auth.CurrentUser.UserId; } }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Exception != null)
@@ -27,6 +41,11 @@ public class SignIn : MonoBehaviour
 
             auth = FirebaseAuth.DefaultInstance;
         });
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+
     }
 
     public void SignInButton()
@@ -80,6 +99,13 @@ public class SignIn : MonoBehaviour
         });
     }
 
+    public void PlayerDataLoaded()
+    {
+        //TODO: In final version we will load next scene directly
+
+        //Activate the play button once we have logged in
+        playButton.interactable = true;
+    }
     public void DebugLogIn(int number)
     {
         SignInFirebase("test" + number + "@test.test", "password");

@@ -104,4 +104,6 @@ public class FirebaseTest : MonoBehaviour
             transform.position = savePosition.pos;
         });
     }
+
+
 }
